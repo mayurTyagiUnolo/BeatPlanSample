@@ -34,18 +34,6 @@ struct BottomSaveButton: View {
     }
 }
 
-struct CustomBackButton: View {
-    @Environment(\.dismiss) var dismiss: DismissAction
-
-    var body: some View {
-        Button{
-            dismiss()
-        } label: {
-            Image("new_back_icon")
-        }
-    }
-}
-
 struct SecondaryButton: View{
     var buttonTitle: String
     var buttonIcon: String?

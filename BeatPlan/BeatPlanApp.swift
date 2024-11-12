@@ -11,7 +11,9 @@ import SwiftUI
 struct BeatPlanApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationStack{
+                CreateBeatPlan()
+            }
         }
     }
 }

@@ -50,8 +50,8 @@ open class DatePickerDialog: UIView {
                 showCancelButton: Bool = true) {
         let size = UIScreen.main.bounds.size
         super.init(frame: CGRect(x: 0, y: 0, width: size.width, height: size.height))
-		self.textColor = UIColor().HexToColor(hexString: "3a3a3a")
-        self.buttonColor = UIColor().HexToColor(hexString: "3a3a3a")
+        self.textColor = UIColor.black
+        self.buttonColor = UIColor.blue
 		self.font = UIFont(name: "AvenirNext-Bold", size: 16)
         self.showCancelButton = showCancelButton
         self.locale = locale

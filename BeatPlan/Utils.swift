@@ -19,6 +19,7 @@ class Utils {
     static let visit = Utils.getVisitList()
     
     static var beatApprovalRequired: Bool = true
+    static var beatPlanApprovalRequired: Bool = true
     
     static func getCustomTask() -> [String]{
         return ["task1", "task2", "task3", "task4", "task5"]
@@ -37,6 +38,19 @@ class Utils {
     static let beat = Beat(beatID: UUID().uuidString, beatName: "Beat 1", status: 1, isDeleted: 0, mainOrStaged: 1, visitList: Utils.getVisitList(), createdTs: "", lastModifiedTs: "")
     
     
-    static let beatPlanList = [ BeatPlan(name: "Beat 1", visits: Utils.getVisitList()),
-                                BeatPlan(name: "Beat 2", visits: Utils.getVisitList()) ]
+    
 }
+
+
+
+extension Utils{
+    
+    
+    static let beatArray = [
+        Beat(beatID: UUID().uuidString, beatName: "Beat 1", status: 1, isDeleted: 0, mainOrStaged: 1, visitList: Utils.getVisitList(), createdTs: "", lastModifiedTs: ""),
+        Beat(beatID: UUID().uuidString, beatName: "Beat 2", status: 1, isDeleted: 0, mainOrStaged: 1, visitList: Utils.getVisitList(), createdTs: "", lastModifiedTs: ""),
+        Beat(beatID: UUID().uuidString, beatName: "Beat 3", status: 1, isDeleted: 0, mainOrStaged: 1, visitList: Utils.getVisitList(), createdTs: "", lastModifiedTs: "")
+        ]
+    
+}
+
