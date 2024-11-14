@@ -43,10 +43,18 @@ extension CreateBeatPlan{
         
         func handleRepeatingMetaData(isOn repeatPlan: Bool, index arrayIndex: Int){
             if repeatPlan{
-                print("\(repeatPlan), \(arrayIndex)")
+                beatPlanArray[arrayIndex].beatPlanMetaData = createMetaData()
             }else{
-                print("delete \(repeatPlan), \(arrayIndex)")
+                beatPlanArray[arrayIndex].beatPlanMetaData = nil
             }
+        }
+        
+        func createMetaData() -> BeatPlanMetaData{
+            BeatPlanMetaData(beatPlanMetaDataID: UUID().uuidString, beatID: UUID().uuidString, employeeID: "", startDate: "", endDate: "", mon: false, tue: false, wed: false, thu: false, fri: false, sat: false, sun: false, createdTs: "", lastModifiedTs: "")
+        }
+        
+        func deleteBeatPlanItem(index: Int){
+            beatPlanArray.remove(at: index)
         }
     }
 }

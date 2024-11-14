@@ -46,6 +46,7 @@ struct CreateBeatPlan: View {
     
     private func saveButtonTapped() {
         presentationMode.wrappedValue.dismiss()
+        dump(viewModel.beatPlanArray)
     }
 }
 
@@ -94,8 +95,8 @@ struct BeatPlanRow: View {
                                 .padding(.trailing)
                         }
                         
-                        DaysPicker(selectedDays: $selectedDays)
-                            .padding([.horizontal, .top])
+//                        DaysPicker(selectedDays: $selectedDays)
+//                            .padding([.horizontal, .top])
                     }
                 }
             }
@@ -103,7 +104,9 @@ struct BeatPlanRow: View {
             
             if viewModel.beatPlanArray.count > 1{
                 Button("", systemImage: "trash") {
-                    // code for delete the beat Paln item
+                    withAnimation{
+                        viewModel.deleteBeatPlanItem(index: rowIndex)
+                    }
                 }
                 .tint(.red)
                 .padding(.trailing)
@@ -247,6 +250,7 @@ struct DateRangeElement: View {
 
 struct DaysPicker: View {
     @Binding var selectedDays: [Day]
+    @ObservedObject var viewModel: CreateBeatPlan.ViewModel
     
     var body: some View {
         HStack() {
