@@ -9,29 +9,31 @@ struct CreateBeatPlan: View {
     var body: some View {
         VStack {
             ScrollView {
-                ForEach($viewModel.beatPlanArray) { $beatPlan in
-                    BeatPlanRow(
-                        beatPlan: $beatPlan,
-                        viewModel: viewModel,
-                        selectedDays: $selectedDays
-                    )
-                }
-                .onDelete { indexSet in
-                    viewModel.beatPlanArray.remove(atOffsets: indexSet)
-                }
-            }
-            
-            HStack {
-                Spacer()
-                Button("+ Add more") {
-                    withAnimation {
-                        viewModel.beatPlanArray.append(viewModel.newBeatPlan())
+                ForEach(viewModel.beatPlanArray.indices, id: \.self) { index in
+
+                    BeatPlanRow(viewModel: viewModel, beatPlan: $viewModel.beatPlanArray[index], rowIndex: index)
+                    
+                    if index == viewModel.beatPlanArray.count - 1 {
+                        HStack {
+                            Spacer()
+                            Button("+ Add more") {
+                                withAnimation {
+                                    viewModel.beatPlanArray.append(viewModel.newBeatPlan())
+                                }
+                            }
+                        }
+                        .padding(.horizontal)
+                    }else {
+                        Divider()
+                            .padding()
                     }
+                   
+                    
                 }
             }
-            .padding(.horizontal)
             
-            Spacer()
+            
+//            Spacer()
             
             BottomSaveButton(buttonTitle: "Save") {
                 saveButtonTapped()
@@ -48,14 +50,11 @@ struct CreateBeatPlan: View {
 }
 
 struct BeatPlanRow: View {
-    @Binding var beatPlan: BeatPlan
+    @SwiftUI.State private var repeatPlan: Bool = false
     @ObservedObject var viewModel: CreateBeatPlan.ViewModel
-    @Binding var selectedDays: [Day]
-    
-    @SwiftUI.State private var repeatBeatPlan = true
-    @SwiftUI.State private var startDateString: String?
-    @SwiftUI.State private var endDateString: String?
-    
+    @Binding var beatPlan: BeatPlan
+    var rowIndex: Int
+
     var body: some View {
         HStack{
             VStack {
@@ -64,33 +63,51 @@ struct BeatPlanRow: View {
                 DatePickerLabel(label: "Start on", dateString: $beatPlan.date)
                     .padding()
                 
-                Toggle(isOn: $repeatBeatPlan) {
+                Toggle(isOn: $repeatPlan.animation()) {
                     Text("Repeat")
                 }
                 .padding(.horizontal)
                 .tint(.accentColor)
+                .onChange(of: repeatPlan) { newValue in
+                    withAnimation{
+                        viewModel.handleRepeatingMetaData(isOn: newValue, index: rowIndex)
+                    }
+                }
                 
-                if repeatBeatPlan {
+                if repeatPlan {
                     VStack {
                         HStack {
-                            SecondDatePickerLabel(label: "Start Date", dateString: $startDateString)
+                            let startDate = Binding<String?>(
+                                get: {beatPlan.beatPlanMetaData?.startDate},
+                                set: {newValue in beatPlan.beatPlanMetaData?.startDate = newValue ?? ""}
+                            )
+                            
+                            SecondDatePickerLabel(label: "Start Date", dateString: startDate)
                                 .padding(.leading)
                             
-                            SecondDatePickerLabel(label: "End Date", dateString: $endDateString)
+                            let endDate = Binding<String?>(
+                                get: {beatPlan.beatPlanMetaData?.endDate},
+                                set: {newValue in beatPlan.beatPlanMetaData?.endDate = newValue ?? ""}
+                            )
+                            
+                            SecondDatePickerLabel(label: "End Date", dateString: endDate)
                                 .padding(.trailing)
                         }
                         
-                        DaysPicker(selectedDays: $selectedDays)
-                            .padding([.horizontal, .top])
+//                        DaysPicker(selectedDays: $selectedDays)
+//                            .padding([.horizontal, .top])
                     }
                 }
             }
             .padding()
             
-            Button("", systemImage: "trash") {
-                // code for delete the beat Paln item
+            if viewModel.beatPlanArray.count > 1{
+                Button("", systemImage: "trash") {
+                    // code for delete the beat Paln item
+                }
+                .tint(.red)
+                .padding(.trailing)
             }
-            .tint(.red)
         }
     }
 }

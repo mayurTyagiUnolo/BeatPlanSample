@@ -18,7 +18,7 @@ extension CreateBeatPlan{
                          beatPlanMetaDataID: UUID().uuidString,
                          beatID: "",
                          date: "",
-                         status: Utils.beatApprovalRequired ? 0 : 4,
+                         status: Utils.beatPlanApprovalRequired ? 0 : 4,
                          expectedVisitCount: 0,
                          createdTs: "",
                          lastModifiedTs: "")
@@ -29,15 +29,24 @@ extension CreateBeatPlan{
             beatArray.first(where: {$0.beatID == beatID})?.beatName
         }
         
+        
         func newBeatPlan() -> BeatPlan{
             BeatPlan(beatPlanID: UUID().uuidString,
                      beatPlanMetaDataID: UUID().uuidString,
                      beatID: "",
                      date: "",
-                     status: Utils.beatApprovalRequired ? 0 : 4,
+                     status: Utils.beatPlanApprovalRequired ? 0 : 4,
                      expectedVisitCount: 0,
                      createdTs: "",
                      lastModifiedTs: "")
+        }
+        
+        func handleRepeatingMetaData(isOn repeatPlan: Bool, index arrayIndex: Int){
+            if repeatPlan{
+                print("\(repeatPlan), \(arrayIndex)")
+            }else{
+                print("delete \(repeatPlan), \(arrayIndex)")
+            }
         }
     }
 }

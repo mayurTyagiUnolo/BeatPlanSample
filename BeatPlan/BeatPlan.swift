@@ -1,11 +1,12 @@
 //
 //  BeatPlan.swift
-//  BeatPlanSampleProject
+//  senseStaff
 //
-//  Created by Mayur Tyagi on 29/10/24.
+//  Created by Mayur Tyagi on 07/11/24.
+//  Copyright © 2024 SmartSense. All rights reserved.
 //
 
-
+import UIKit
 
 class BeatPlan: Identifiable{
     var id: String { beatPlanID }
@@ -34,6 +35,8 @@ class BeatPlan: Identifiable{
     var lastModifiedTs: String
     
     var isExpanded: Bool = false // to expand or collapse in beat plan list
+//    var isRepeated: Bool = false // to repeat beat Plan for multiple days for selecte date range.
+    var beatPlanMetaData: BeatPlanMetaData?
     
     init(beatPlanID: String, beatPlanMetaDataID: String, beatID: String, date: String, status: Int, optRouteByEmp: String? = nil, optDistanceByEmp: Float? = nil, optRouteByAdmin: String? = nil, optDistanceByAdmin: Float? = nil, expectedVisitCount: Int, actualDistance: Float? = nil, actualRoute: Int? = nil, actualVisitCount: Int? = nil, comment: String? = nil, beatPlanVisitDetails: BeatPlanVisitDetails? = nil, beatPlanAdhocVisitDetails: BeatPlanAdhocVisitDetails? = nil, createdByAdminID: Int? = nil, lastModifiedByAdminID: Int? = nil, createdByEmployeeID: Int? = nil, lastModifiedByEmployeeID: Int? = nil, createdTs: String, lastModifiedTs: String) {
         self.beatPlanID = beatPlanID
@@ -61,8 +64,8 @@ class BeatPlan: Identifiable{
     }
 }
 
-class BeatPlanVisitDetails: Identifiable {
-    var id: String { beatVisitID }
+public class BeatPlanVisitDetails: NSObject, Identifiable {
+    public var id: String { beatVisitID }
     
     var beatPlanID: String
     var beatVisitID: String
@@ -75,7 +78,7 @@ class BeatPlanVisitDetails: Identifiable {
     }
 }
 
-class BeatPlanAdhocVisitDetails {
+public class BeatPlanAdhocVisitDetails: NSObject {
     var beatPlanID: String
     var taskID: String?
     var taskType: String?
@@ -92,5 +95,40 @@ class BeatPlanAdhocVisitDetails {
         self.lat = lat
         self.lon = lon
         self.radius = radius
+    }
+}
+
+
+class BeatPlanMetaData{
+    var beatPlanMetaDataID: String
+    var beatID: String
+    var employeeID: String
+    var startDate: String
+    var endDate: String
+    var mon: Bool
+    var tue: Bool
+    var wed: Bool
+    var thu: Bool
+    var fri: Bool
+    var sat: Bool
+    var sun: Bool
+    var createdTs: String
+    var lastModifiedTs: String
+    
+    init(beatPlanMetaDataID: String, beatID: String, employeeID: String, startDate: String, endDate: String, mon: Bool, tue: Bool, wed: Bool, thu: Bool, fri: Bool, sat: Bool, sun: Bool, createdTs: String, lastModifiedTs: String) {
+        self.beatPlanMetaDataID = beatPlanMetaDataID
+        self.beatID = beatID
+        self.employeeID = employeeID
+        self.startDate = startDate
+        self.endDate = endDate
+        self.mon = mon
+        self.tue = tue
+        self.wed = wed
+        self.thu = thu
+        self.fri = fri
+        self.sat = sat
+        self.sun = sun
+        self.createdTs = createdTs
+        self.lastModifiedTs = lastModifiedTs
     }
 }
