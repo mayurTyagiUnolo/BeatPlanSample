@@ -82,7 +82,7 @@ struct BeatPlanRow: View {
                                 set: {newValue in beatPlan.beatPlanMetaData?.startDate = newValue ?? ""}
                             )
                             
-                            SecondDatePickerLabel(label: "Start Date", dateString: startDate)
+                            DateRangeElement(label: "Start Date", dateString: startDate)
                                 .padding(.leading)
                             
                             let endDate = Binding<String?>(
@@ -90,12 +90,12 @@ struct BeatPlanRow: View {
                                 set: {newValue in beatPlan.beatPlanMetaData?.endDate = newValue ?? ""}
                             )
                             
-                            SecondDatePickerLabel(label: "End Date", dateString: endDate)
+                            DateRangeElement(label: "End Date", dateString: endDate)
                                 .padding(.trailing)
                         }
                         
-//                        DaysPicker(selectedDays: $selectedDays)
-//                            .padding([.horizontal, .top])
+                        DaysPicker(selectedDays: $selectedDays)
+                            .padding([.horizontal, .top])
                     }
                 }
             }
@@ -202,7 +202,7 @@ struct DatePickerLabel: View {
 
 
 
-struct SecondDatePickerLabel: View {
+struct DateRangeElement: View {
     let label: String
     @Binding var dateString: String?
     
