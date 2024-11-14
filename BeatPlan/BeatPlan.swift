@@ -8,7 +8,31 @@
 
 import UIKit
 
-class BeatPlan: Identifiable{
+class BeatPlan: Identifiable, Equatable{
+    static func == (lhs: BeatPlan, rhs: BeatPlan) -> Bool {
+            return lhs.beatPlanID == rhs.beatPlanID &&
+                   lhs.beatPlanMetaDataID == rhs.beatPlanMetaDataID &&
+                   lhs.beatID == rhs.beatID &&
+                   lhs.date == rhs.date &&
+                   lhs.status == rhs.status &&
+                   lhs.optRouteByEmp == rhs.optRouteByEmp &&
+                   lhs.optDistanceByEmp == rhs.optDistanceByEmp &&
+                   lhs.optRouteByAdmin == rhs.optRouteByAdmin &&
+                   lhs.optDistanceByAdmin == rhs.optDistanceByAdmin &&
+                   lhs.expectedVisitCount == rhs.expectedVisitCount &&
+                   lhs.actualDistance == rhs.actualDistance &&
+                   lhs.actualRoute == rhs.actualRoute &&
+                   lhs.actualVisitCount == rhs.actualVisitCount &&
+                   lhs.comment == rhs.comment &&
+                   lhs.createdByAdminID == rhs.createdByAdminID &&
+                   lhs.lastModifiedByAdminID == rhs.lastModifiedByAdminID &&
+                   lhs.createdByEmployeeID == rhs.createdByEmployeeID &&
+                   lhs.lastModifiedByEmployeeID == rhs.lastModifiedByEmployeeID &&
+                   lhs.createdTs == rhs.createdTs &&
+                   lhs.lastModifiedTs == rhs.lastModifiedTs &&
+                   lhs.beatPlanMetaData?.beatPlanMetaDataID == rhs.beatPlanMetaData?.beatPlanMetaDataID
+        }
+    
     var id: String { beatPlanID }
     
     var beatPlanID: String

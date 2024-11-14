@@ -6,34 +6,45 @@ struct CreateBeatPlan: View {
     
     @SwiftUI.State private var selectedDays: [Day] = []
     
+    @State private var scrollToIndex: Int?
+    
     var body: some View {
         VStack {
-            ScrollView {
-                ForEach(viewModel.beatPlanArray.indices, id: \.self) { index in
-
-                    BeatPlanRow(viewModel: viewModel, beatPlan: $viewModel.beatPlanArray[index], rowIndex: index)
-                    
-                    if index == viewModel.beatPlanArray.count - 1 {
-                        HStack {
-                            Spacer()
-                            Button("+ Add more") {
-                                withAnimation {
+            ScrollViewReader{ value in
+                ScrollView {
+                    ForEach(viewModel.beatPlanArray.indices, id: \.self) { index in
+                        
+                        BeatPlanRow(viewModel: viewModel, beatPlan: $viewModel.beatPlanArray[index], rowIndex: index)
+                            .id(index)
+                        
+                        if index == viewModel.beatPlanArray.count - 1 {
+                            HStack {
+                                Spacer()
+                                Button("+ Add more") {
+//                                    withAnimation {
                                     viewModel.beatPlanArray.append(viewModel.newBeatPlan())
+//                                    }
+                                    scrollToIndex =  viewModel.beatPlanArray.count - 1
                                 }
                             }
+                            .padding(.horizontal)
+                           
+                        }else {
+                            Divider()
+                                .padding()
                         }
-                        .padding(.horizontal)
-                    }else {
-                        Divider()
-                            .padding()
+                        
+                        
                     }
-                   
-                    
+                }
+                .onChange(of: scrollToIndex) { newIndex in
+                    if let index = newIndex, viewModel.beatPlanArray.indices.contains(index) {
+                        withAnimation {
+                            value.scrollTo(index, anchor: .center)
+                        }
+                    }
                 }
             }
-            
-            
-//            Spacer()
             
             BottomSaveButton(buttonTitle: "Save") {
                 saveButtonTapped()
@@ -104,7 +115,7 @@ struct BeatPlanRow: View {
             
             if viewModel.beatPlanArray.count > 1{
                 Button("", systemImage: "trash") {
-                    withAnimation{
+                    withAnimation(.easeInOut){
                         viewModel.deleteBeatPlanItem(index: rowIndex)
                     }
                 }
