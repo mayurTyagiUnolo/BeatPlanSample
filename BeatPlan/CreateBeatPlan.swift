@@ -105,7 +105,7 @@ struct BeatPlanRow: View {
                             DateRangeElement(label: "End Date", dateString: endDate)
                                 .padding(.trailing)
                         }
-                        
+                        let selectedDays =
 //                        DaysPicker(selectedDays: $selectedDays)
 //                            .padding([.horizontal, .top])
                     }

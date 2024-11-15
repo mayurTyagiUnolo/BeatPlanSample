@@ -26,7 +26,7 @@ struct CustomAlertOfOptions: View {
                     HStack{
                         Image(systemName: optionOneSelected ? "record.circle" : "circle")
                             .foregroundStyle(optionOneSelected ? .blue : .gray)
-                            .font(.title)
+                            .font(.title3)
                         Text(optionOne)
                             .foregroundStyle(.black)
                     }
@@ -38,7 +38,7 @@ struct CustomAlertOfOptions: View {
                 } label: {
                     HStack{
                         Image(systemName: optionSecondSelected ? "record.circle" : "circle")
-                            .font(.caption)
+                            .font(.title3)
                             .foregroundStyle(optionSecondSelected ? .blue : .gray)
                         Text(optionSecond)
                             .foregroundStyle(.black)
@@ -52,13 +52,13 @@ struct CustomAlertOfOptions: View {
                 Spacer()
                 
                 Button("Cancel"){
-                    showAlert = false
+                        showAlert = false
                 }
                 .foregroundStyle(.gray)
                 .padding()
                 
                 Button("Apply"){
-                    showAlert = false
+                        showAlert = false
                 }
                 
             }
@@ -96,7 +96,7 @@ struct CustomAlertOfTextView: View {
             
             HStack(spacing: 20){
                 Button("Go Back"){
-                    showAlert = false
+                        showAlert = false
                 }
                 .frame(maxWidth: .infinity)
                 .padding(EdgeInsets(top: 13, leading: 0, bottom: 13, trailing: 0))
@@ -105,7 +105,7 @@ struct CustomAlertOfTextView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 10))
                 
                 Button("Cancel Visit"){
-                    showAlert = false
+                        showAlert = false
                 }
                 .frame(maxWidth: .infinity)
                 .padding(EdgeInsets(top: 13, leading: 0, bottom: 13, trailing: 0))

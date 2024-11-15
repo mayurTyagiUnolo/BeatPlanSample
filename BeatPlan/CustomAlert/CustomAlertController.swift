@@ -18,7 +18,9 @@ struct CustomAlertController: View {
                 Spacer()
                 
                 Button("optionAlert"){
-                    showOptionAlert = true
+                    withAnimation{
+                        showOptionAlert = true
+                    }
                 }
                 .frame(width: 100, height: 40)
                 .padding()
@@ -26,7 +28,9 @@ struct CustomAlertController: View {
                 .clipShape(.capsule)
                 
                 Button("reasonAlert"){
-                    showReasonAlert = true
+                    withAnimation{
+                        showReasonAlert = true
+                    }
                 }
                 .frame(width: 100, height: 40)
                 .padding()
