@@ -66,6 +66,8 @@ struct BeatPlanRow: View {
     @ObservedObject var viewModel: CreateBeatPlan.ViewModel
     @Binding var beatPlan: BeatPlan
     var rowIndex: Int
+    
+    @State private var selectedDays: [Day] = []
 
     var body: some View {
         HStack{
@@ -91,7 +93,8 @@ struct BeatPlanRow: View {
                         HStack {
                             let startDate = Binding<String?>(
                                 get: {beatPlan.beatPlanMetaData?.startDate},
-                                set: {newValue in beatPlan.beatPlanMetaData?.startDate = newValue ?? ""}
+                                set: {newValue in beatPlan.beatPlanMetaData?.startDate = newValue ?? ""
+                                    viewModel.objectWillChange.send()}
                             )
                             
                             DateRangeElement(label: "Start Date", dateString: startDate)
@@ -99,15 +102,22 @@ struct BeatPlanRow: View {
                             
                             let endDate = Binding<String?>(
                                 get: {beatPlan.beatPlanMetaData?.endDate},
-                                set: {newValue in beatPlan.beatPlanMetaData?.endDate = newValue ?? ""}
+                                set: {newValue in beatPlan.beatPlanMetaData?.endDate = newValue ?? ""
+                                    viewModel.objectWillChange.send()}
                             )
                             
                             DateRangeElement(label: "End Date", dateString: endDate)
                                 .padding(.trailing)
                         }
-                        let selectedDays =
-//                        DaysPicker(selectedDays: $selectedDays)
-//                            .padding([.horizontal, .top])
+                        
+                        let selectedDays = Binding<[Day]>(
+                            get: {beatPlan.beatPlanMetaData?.selectedDaysArray ?? []},
+                            set: {newArray in beatPlan.beatPlanMetaData?.selectedDaysArray = newArray
+                                  viewModel.objectWillChange.send()}
+                        )
+                        DaysPicker(selectedDays: selectedDays, viewModel: viewModel)
+                            .padding()
+                        
                     }
                 }
             }
@@ -264,32 +274,32 @@ struct DaysPicker: View {
     @ObservedObject var viewModel: CreateBeatPlan.ViewModel
     
     var body: some View {
-        HStack() {
-            ForEach(Day.allCases, id: \.self) { day in
-                Text(String(day.rawValue.first!))
-//                    .bold()
-                    .foregroundColor(selectedDays.contains(day) ? .white : .black)
-                    .frame(width: 40, height: 30)
-                    .background(selectedDays.contains(day) ? .blue : .white)
-                    .clipShape(.capsule)
-                    .overlay(
-                        Capsule()
-                            .stroke(.gray.opacity(0.1), lineWidth: 1)
-                    )
-                    .onTapGesture {
-                        if selectedDays.contains(day) {
-                            selectedDays.removeAll(where: {$0 == day})
-                        } else {
-                            selectedDays.append(day)
+        GeometryReader { geometry in
+            HStack() {
+                ForEach(Day.allCases, id: \.self) { day in
+                    Text(String(day.rawValue.first!))
+                        .foregroundColor(selectedDays.contains(day) ? .white : .black)
+                        .frame(
+                            width: geometry.size.width * 0.12, // Example: 12% of width
+                            height: 30
+                        )
+                        .background(selectedDays.contains(day) ? .blue : .white)
+                        .clipShape(.capsule)
+                        .overlay(
+                            Capsule()
+                                .stroke(.gray.opacity(0.1), lineWidth: 1)
+                        )
+                        .onTapGesture {
+                            if selectedDays.contains(day) {
+                                selectedDays.removeAll(where: {$0 == day})
+                            } else {
+                                selectedDays.append(day)
+                            }
                         }
-                    }
+                }
             }
+            .frame(maxWidth: .infinity)
         }
-        .frame(maxWidth: .infinity)
+        
     }
-}
-
-
-enum Day: String, CaseIterable {
-    case Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday
 }

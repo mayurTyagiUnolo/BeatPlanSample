@@ -156,3 +156,32 @@ class BeatPlanMetaData{
         self.lastModifiedTs = lastModifiedTs
     }
 }
+
+extension BeatPlanMetaData {
+    var selectedDaysArray: [Day] {
+        get {
+            var days = [Day]()
+            if mon { days.append(.Monday) }
+            if tue { days.append(.Tuesday) }
+            if wed { days.append(.Wednesday) }
+            if thu { days.append(.Thursday) }
+            if fri { days.append(.Friday) }
+            if sat { days.append(.Saturday) }
+            if sun { days.append(.Sunday) }
+            return days
+        }
+        set {
+            mon = newValue.contains(.Monday)
+            tue = newValue.contains(.Tuesday)
+            wed = newValue.contains(.Wednesday)
+            thu = newValue.contains(.Thursday)
+            fri = newValue.contains(.Friday)
+            sat = newValue.contains(.Saturday)
+            sun = newValue.contains(.Sunday)
+        }
+    }
+}
+
+enum Day: String, CaseIterable {
+    case Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday
+}
