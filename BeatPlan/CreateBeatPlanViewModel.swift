@@ -13,16 +13,7 @@ extension CreateBeatPlan{
         
         init() {
             self.beatArray = Utils.beatArray // get beat from BeatCDHelper
-            self.beatPlanArray = [
-                BeatPlan(beatPlanID: UUID().uuidString,
-                         beatPlanMetaDataID: UUID().uuidString,
-                         beatID: "",
-                         date: "",
-                         status: Utils.beatPlanApprovalRequired ? 0 : 4,
-                         expectedVisitCount: 0,
-                         createdTs: "",
-                         lastModifiedTs: "")
-            ]
+            self.beatPlanArray = [newBeatPlan()]
         }
         
         func getBeatName(beatID: String?) -> String?{
@@ -32,29 +23,49 @@ extension CreateBeatPlan{
         
         func newBeatPlan() -> BeatPlan{
             BeatPlan(beatPlanID: UUID().uuidString,
-                     beatPlanMetaDataID: UUID().uuidString,
                      beatID: "",
                      date: "",
                      status: Utils.beatPlanApprovalRequired ? 0 : 4,
-                     expectedVisitCount: 0,
                      createdTs: "",
                      lastModifiedTs: "")
         }
         
         func handleRepeatingMetaData(isOn repeatPlan: Bool, index arrayIndex: Int){
             if repeatPlan{
-                beatPlanArray[arrayIndex].beatPlanMetaData = createMetaData()
+                let newMetaData = createMetaData()
+                beatPlanArray[arrayIndex].beatPlanMetaData = newMetaData
+                beatPlanArray[arrayIndex].beatPlanMetaDataID = newMetaData.beatPlanMetaDataID
             }else{
                 beatPlanArray[arrayIndex].beatPlanMetaData = nil
+                beatPlanArray[arrayIndex].beatPlanMetaDataID = nil
             }
         }
         
         func createMetaData() -> BeatPlanMetaData{
-            BeatPlanMetaData(beatPlanMetaDataID: UUID().uuidString, beatID: UUID().uuidString, employeeID: "", startDate: "", endDate: "", mon: false, tue: false, wed: false, thu: false, fri: false, sat: false, sun: false, createdTs: "", lastModifiedTs: "")
+            BeatPlanMetaData(beatPlanMetaDataID: UUID().uuidString, beatID: "", employeeID: Utils.employeeID, startDate: "", endDate: "", mon: false, tue: false, wed: false, thu: false, fri: false, sat: false, sun: false, createdTs: "", lastModifiedTs: "")
         }
         
         func deleteBeatPlanItem(index: Int){
             beatPlanArray.remove(at: index)
+        }
+        
+        func saveBeatPlanAndMetaData(){
+            var metaDataArray = [BeatPlanMetaData]()
+            for beatPlan in beatPlanArray{
+                if let metaData = beatPlan.beatPlanMetaData{
+                    metaData.beatID = beatPlan.beatID
+                    metaDataArray.append(metaData)
+                }
+                
+                dump(beatPlanArray)
+                
+                dump(metaDataArray)
+                
+                // save beatPlan metaData in CoreData
+                
+                // save beatPlan in CoreData
+                
+            }
         }
     }
 }

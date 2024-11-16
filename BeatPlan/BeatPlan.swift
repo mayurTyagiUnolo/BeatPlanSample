@@ -9,6 +9,60 @@
 import UIKit
 
 class BeatPlan: Identifiable, Equatable{
+    var id: String { beatPlanID }
+    
+    var beatPlanID: String
+    var beatPlanMetaDataID: String?
+    var beatID: String
+    var date: String
+    var status: Int
+    var optRouteByEmp: String?
+    var optDistanceByEmp: Float?
+    var optRouteByAdmin: String?
+    var optDistanceByAdmin: Float?
+    var expectedVisitCount: Int?
+    var actualDistance: Float?
+    var actualRoute: Int?
+    var actualVisitCount: Int?
+    var comment: String?
+    var beatPlanVisitDetails: BeatPlanVisitDetails?
+    var beatPlanAdhocVisitDetails: BeatPlanAdhocVisitDetails?
+    var createdByAdminID: Int?
+    var lastModifiedByAdminID: Int?
+    var createdByEmployeeID: Int?
+    var lastModifiedByEmployeeID: Int?
+    var createdTs: String
+    var lastModifiedTs: String
+    
+    var isExpanded: Bool = false // to expand or collapse in beat plan list
+    var isRepeated: Bool = false // to repeat beat Plan for multiple days for selecte date range.
+    var beatPlanMetaData: BeatPlanMetaData?
+    
+    init(beatPlanID: String, beatPlanMetaDataID: String? = nil, beatID: String, date: String, status: Int, optRouteByEmp: String? = nil, optDistanceByEmp: Float? = nil, optRouteByAdmin: String? = nil, optDistanceByAdmin: Float? = nil, expectedVisitCount: Int? = nil, actualDistance: Float? = nil, actualRoute: Int? = nil, actualVisitCount: Int? = nil, comment: String? = nil, beatPlanVisitDetails: BeatPlanVisitDetails? = nil, beatPlanAdhocVisitDetails: BeatPlanAdhocVisitDetails? = nil, createdByAdminID: Int? = nil, lastModifiedByAdminID: Int? = nil, createdByEmployeeID: Int? = nil, lastModifiedByEmployeeID: Int? = nil, createdTs: String, lastModifiedTs: String) {
+        self.beatPlanID = beatPlanID
+        self.beatPlanMetaDataID = beatPlanMetaDataID
+        self.beatID = beatID
+        self.date = date
+        self.status = status
+        self.optRouteByEmp = optRouteByEmp
+        self.optDistanceByEmp = optDistanceByEmp
+        self.optRouteByAdmin = optRouteByAdmin
+        self.optDistanceByAdmin = optDistanceByAdmin
+        self.expectedVisitCount = expectedVisitCount
+        self.actualDistance = actualDistance
+        self.actualRoute = actualRoute
+        self.actualVisitCount = actualVisitCount
+        self.comment = comment
+        self.beatPlanVisitDetails = beatPlanVisitDetails
+        self.beatPlanAdhocVisitDetails = beatPlanAdhocVisitDetails
+        self.createdByAdminID = createdByAdminID
+        self.lastModifiedByAdminID = lastModifiedByAdminID
+        self.createdByEmployeeID = createdByEmployeeID
+        self.lastModifiedByEmployeeID = lastModifiedByEmployeeID
+        self.createdTs = createdTs
+        self.lastModifiedTs = lastModifiedTs
+    }
+    
     static func == (lhs: BeatPlan, rhs: BeatPlan) -> Bool {
             return lhs.beatPlanID == rhs.beatPlanID &&
                    lhs.beatPlanMetaDataID == rhs.beatPlanMetaDataID &&
@@ -33,59 +87,6 @@ class BeatPlan: Identifiable, Equatable{
                    lhs.beatPlanMetaData?.beatPlanMetaDataID == rhs.beatPlanMetaData?.beatPlanMetaDataID
         }
     
-    var id: String { beatPlanID }
-    
-    var beatPlanID: String
-    var beatPlanMetaDataID: String
-    var beatID: String
-    var date: String
-    var status: Int
-    var optRouteByEmp: String?
-    var optDistanceByEmp: Float?
-    var optRouteByAdmin: String?
-    var optDistanceByAdmin: Float?
-    var expectedVisitCount: Int
-    var actualDistance: Float?
-    var actualRoute: Int?
-    var actualVisitCount: Int?
-    var comment: String?
-    var beatPlanVisitDetails: BeatPlanVisitDetails?
-    var beatPlanAdhocVisitDetails: BeatPlanAdhocVisitDetails?
-    var createdByAdminID: Int?
-    var lastModifiedByAdminID: Int?
-    var createdByEmployeeID: Int?
-    var lastModifiedByEmployeeID: Int?
-    var createdTs: String
-    var lastModifiedTs: String
-    
-    var isExpanded: Bool = false // to expand or collapse in beat plan list
-    var isRepeated: Bool = false // to repeat beat Plan for multiple days for selecte date range.
-    var beatPlanMetaData: BeatPlanMetaData?
-    
-    init(beatPlanID: String, beatPlanMetaDataID: String, beatID: String, date: String, status: Int, optRouteByEmp: String? = nil, optDistanceByEmp: Float? = nil, optRouteByAdmin: String? = nil, optDistanceByAdmin: Float? = nil, expectedVisitCount: Int, actualDistance: Float? = nil, actualRoute: Int? = nil, actualVisitCount: Int? = nil, comment: String? = nil, beatPlanVisitDetails: BeatPlanVisitDetails? = nil, beatPlanAdhocVisitDetails: BeatPlanAdhocVisitDetails? = nil, createdByAdminID: Int? = nil, lastModifiedByAdminID: Int? = nil, createdByEmployeeID: Int? = nil, lastModifiedByEmployeeID: Int? = nil, createdTs: String, lastModifiedTs: String) {
-        self.beatPlanID = beatPlanID
-        self.beatPlanMetaDataID = beatPlanMetaDataID
-        self.beatID = beatID
-        self.date = date
-        self.status = status
-        self.optRouteByEmp = optRouteByEmp
-        self.optDistanceByEmp = optDistanceByEmp
-        self.optRouteByAdmin = optRouteByAdmin
-        self.optDistanceByAdmin = optDistanceByAdmin
-        self.expectedVisitCount = expectedVisitCount
-        self.actualDistance = actualDistance
-        self.actualRoute = actualRoute
-        self.actualVisitCount = actualVisitCount
-        self.comment = comment
-        self.beatPlanVisitDetails = beatPlanVisitDetails
-        self.beatPlanAdhocVisitDetails = beatPlanAdhocVisitDetails
-        self.createdByAdminID = createdByAdminID
-        self.lastModifiedByAdminID = lastModifiedByAdminID
-        self.createdByEmployeeID = createdByEmployeeID
-        self.lastModifiedByEmployeeID = lastModifiedByEmployeeID
-        self.createdTs = createdTs
-        self.lastModifiedTs = lastModifiedTs
-    }
 }
 
 public class BeatPlanVisitDetails: NSObject, Identifiable {

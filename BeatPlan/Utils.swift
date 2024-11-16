@@ -8,6 +8,7 @@ import Foundation
 
 class Utils {
     static let authorisation = Authorization()
+    static var employeeID = "4"
     
     
     struct Authorization {

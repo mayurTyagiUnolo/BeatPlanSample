@@ -55,7 +55,7 @@ struct CreateBeatPlan: View {
     
     private func saveButtonTapped() {
         presentationMode.wrappedValue.dismiss()
-        dump(viewModel.beatPlanArray)
+        viewModel.saveBeatPlanAndMetaData()
     }
 }
 
