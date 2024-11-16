@@ -4,8 +4,6 @@ struct CreateBeatPlan: View {
     @Environment(\.presentationMode) private var presentationMode
     @StateObject private var viewModel = CreateBeatPlan.ViewModel()
     
-    @SwiftUI.State private var selectedDays: [Day] = []
-    
     @State private var scrollToIndex: Int?
     
     var body: some View {
@@ -62,7 +60,6 @@ struct CreateBeatPlan: View {
 }
 
 struct BeatPlanRow: View {
-    @SwiftUI.State private var repeatPlan: Bool = false
     @ObservedObject var viewModel: CreateBeatPlan.ViewModel
     @Binding var beatPlan: BeatPlan
     var rowIndex: Int
@@ -77,18 +74,18 @@ struct BeatPlanRow: View {
                 DatePickerLabel(label: "Start on", dateString: $beatPlan.date)
                     .padding()
                 
-                Toggle(isOn: $repeatPlan.animation()) {
+                Toggle(isOn: $beatPlan.isRepeated.animation()) {
                     Text("Repeat")
                 }
                 .padding(.horizontal)
                 .tint(.accentColor)
-                .onChange(of: repeatPlan) { newValue in
+                .onChange(of: beatPlan.isRepeated) { newValue in
                     withAnimation{
                         viewModel.handleRepeatingMetaData(isOn: newValue, index: rowIndex)
                     }
                 }
                 
-                if repeatPlan {
+                if beatPlan.isRepeated {
                     VStack {
                         HStack {
                             let startDate = Binding<String?>(
@@ -231,7 +228,7 @@ struct DateRangeElement: View {
     @Binding var dateString: String?
     
     var body: some View {
-        Label(dateString ?? "\(label)", systemImage: "calendar")
+        Label(dateString?.isEmpty == false ? dateString ?? label : label, systemImage: "calendar")
             .frame(maxWidth: .infinity, minHeight: 40)
             .background(.gray.opacity(0.1))
             .clipShape(RoundedRectangle(cornerRadius: 5))
@@ -287,7 +284,7 @@ struct DaysPicker: View {
                         .clipShape(.capsule)
                         .overlay(
                             Capsule()
-                                .stroke(.gray.opacity(0.1), lineWidth: 1)
+                                .stroke(.gray.opacity(0.5), lineWidth: 1)
                         )
                         .onTapGesture {
                             if selectedDays.contains(day) {

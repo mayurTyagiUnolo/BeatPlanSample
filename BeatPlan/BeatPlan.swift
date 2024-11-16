@@ -59,7 +59,7 @@ class BeatPlan: Identifiable, Equatable{
     var lastModifiedTs: String
     
     var isExpanded: Bool = false // to expand or collapse in beat plan list
-//    var isRepeated: Bool = false // to repeat beat Plan for multiple days for selecte date range.
+    var isRepeated: Bool = false // to repeat beat Plan for multiple days for selecte date range.
     var beatPlanMetaData: BeatPlanMetaData?
     
     init(beatPlanID: String, beatPlanMetaDataID: String, beatID: String, date: String, status: Int, optRouteByEmp: String? = nil, optDistanceByEmp: Float? = nil, optRouteByAdmin: String? = nil, optDistanceByAdmin: Float? = nil, expectedVisitCount: Int, actualDistance: Float? = nil, actualRoute: Int? = nil, actualVisitCount: Int? = nil, comment: String? = nil, beatPlanVisitDetails: BeatPlanVisitDetails? = nil, beatPlanAdhocVisitDetails: BeatPlanAdhocVisitDetails? = nil, createdByAdminID: Int? = nil, lastModifiedByAdminID: Int? = nil, createdByEmployeeID: Int? = nil, lastModifiedByEmployeeID: Int? = nil, createdTs: String, lastModifiedTs: String) {
