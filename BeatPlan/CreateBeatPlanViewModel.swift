@@ -20,12 +20,17 @@ extension CreateBeatPlan{
             beatArray.first(where: {$0.beatID == beatID})?.beatName
         }
         
+        func getVisitCount(beatID: String) -> Int{
+            beatArray.first(where: {$0.beatID == beatID})?.visitList.filter({$0.isDeleted != 1}).count ?? 0
+        }
+        
         
         func newBeatPlan() -> BeatPlan{
             BeatPlan(beatPlanID: UUID().uuidString,
                      beatID: "",
                      date: "",
                      status: Utils.beatPlanApprovalRequired ? 0 : 4,
+                     expectedVisitCount: 0,
                      createdTs: "",
                      lastModifiedTs: "")
         }
@@ -52,6 +57,8 @@ extension CreateBeatPlan{
         func saveBeatPlanAndMetaData(){
             var metaDataArray = [BeatPlanMetaData]()
             for beatPlan in beatPlanArray{
+                beatPlan.expectedVisitCount = getVisitCount(beatID: beatPlan.beatID)
+                
                 if let metaData = beatPlan.beatPlanMetaData{
                     metaData.beatID = beatPlan.beatID
                     metaDataArray.append(metaData)

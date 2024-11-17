@@ -20,7 +20,7 @@ class BeatPlan: Identifiable, Equatable{
     var optDistanceByEmp: Float?
     var optRouteByAdmin: String?
     var optDistanceByAdmin: Float?
-    var expectedVisitCount: Int?
+    var expectedVisitCount: Int
     var actualDistance: Float?
     var actualRoute: Int?
     var actualVisitCount: Int?
@@ -38,7 +38,7 @@ class BeatPlan: Identifiable, Equatable{
     var isRepeated: Bool = false // to repeat beat Plan for multiple days for selecte date range.
     var beatPlanMetaData: BeatPlanMetaData?
     
-    init(beatPlanID: String, beatPlanMetaDataID: String? = nil, beatID: String, date: String, status: Int, optRouteByEmp: String? = nil, optDistanceByEmp: Float? = nil, optRouteByAdmin: String? = nil, optDistanceByAdmin: Float? = nil, expectedVisitCount: Int? = nil, actualDistance: Float? = nil, actualRoute: Int? = nil, actualVisitCount: Int? = nil, comment: String? = nil, beatPlanVisitDetails: BeatPlanVisitDetails? = nil, beatPlanAdhocVisitDetails: BeatPlanAdhocVisitDetails? = nil, createdByAdminID: Int? = nil, lastModifiedByAdminID: Int? = nil, createdByEmployeeID: Int? = nil, lastModifiedByEmployeeID: Int? = nil, createdTs: String, lastModifiedTs: String) {
+    init(beatPlanID: String, beatPlanMetaDataID: String? = nil, beatID: String, date: String, status: Int, optRouteByEmp: String? = nil, optDistanceByEmp: Float? = nil, optRouteByAdmin: String? = nil, optDistanceByAdmin: Float? = nil, expectedVisitCount: Int, actualDistance: Float? = nil, actualRoute: Int? = nil, actualVisitCount: Int? = nil, comment: String? = nil, beatPlanVisitDetails: BeatPlanVisitDetails? = nil, beatPlanAdhocVisitDetails: BeatPlanAdhocVisitDetails? = nil, createdByAdminID: Int? = nil, lastModifiedByAdminID: Int? = nil, createdByEmployeeID: Int? = nil, lastModifiedByEmployeeID: Int? = nil, createdTs: String, lastModifiedTs: String) {
         self.beatPlanID = beatPlanID
         self.beatPlanMetaDataID = beatPlanMetaDataID
         self.beatID = beatID
