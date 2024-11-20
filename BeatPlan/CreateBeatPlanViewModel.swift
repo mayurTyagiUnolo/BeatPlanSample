@@ -76,3 +76,16 @@ extension CreateBeatPlan{
         }
     }
 }
+
+struct ListEmptyView: View {
+    var addWhat: String = "visits"
+    
+    var body: some View {
+            VStack(spacing: 10){
+                Text("List is empty")
+                    .font(.system(size: 20, weight: .bold))
+                Text("Press + button to add \(addWhat)")
+                    .foregroundStyle(.secondary)
+            }
+    }
+}

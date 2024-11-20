@@ -5,6 +5,7 @@
 //  Created by Mayur Tyagi on 01/10/24.
 //
 import Foundation
+import UIKit
 
 class Utils {
     static let authorisation = Authorization()
@@ -53,5 +54,18 @@ extension Utils{
         Beat(beatID: UUID().uuidString, beatName: "Beat 3", status: 1, isDeleted: 0, mainOrStaged: 1, visitList: Utils.getVisitList(), createdTs: "", lastModifiedTs: "")
         ]
     
+    
+    static func setStatus(status: Int) -> (text: String, textColor: UIColor, backgroundColor: UIColor) {
+        switch status{
+        case 0:
+            return ("REJECT", REJECTED_FORGROUND, REJECTED_BACKGROUND)
+        case 1:
+            return ("APPROVED", APPROVED_FORGROUND, APPROVED_BACKGROUND)
+        case 2:
+            return ("PENDING", PENDING_FORGROUND, PENDING_BACKGROUND)
+        default:
+            return ("NOT_REQUIRED", .black, .clear)
+        }
+    }
 }
 

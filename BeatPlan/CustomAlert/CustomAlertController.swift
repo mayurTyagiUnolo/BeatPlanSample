@@ -41,12 +41,12 @@ struct CustomAlertController: View {
             .background(.yellow)
             
             if showOptionAlert{
-                CustomAlertOfOptions(optionOne: "Choose for one day", optionSecond: "Choose for multiple days", showAlert: $showOptionAlert)
+                CustomAlertOfOptions(optionOne: "Choose for one day", optionSecond: "Choose for multiple days", completionHander: {i in }, showAlert: $showOptionAlert)
             }
             
-            if showReasonAlert{
-                CustomAlertOfTextView(showAlert: $showReasonAlert)
-            }
+//            if showReasonAlert{
+////                CustomAlertOfTextView(showAlert: $showReasonAlert)
+//            }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.gray.opacity(0.2))
