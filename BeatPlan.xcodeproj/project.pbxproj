@@ -6,8 +6,13 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		5078953A2CEF5B98005CFD8D /* RoundedTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507895392CEF5B98005CFD8D /* RoundedTextFieldStyle.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		506817192CDC8C2E007FF9CF /* BeatPlan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeatPlan.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		507895392CEF5B98005CFD8D /* RoundedTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextFieldStyle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -33,6 +38,7 @@
 			isa = PBXGroup;
 			children = (
 				5068171B2CDC8C2E007FF9CF /* BeatPlan */,
+				507895392CEF5B98005CFD8D /* RoundedTextFieldStyle.swift */,
 				5068171A2CDC8C2E007FF9CF /* Products */,
 			);
 			sourceTree = "<group>";
@@ -119,6 +125,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5078953A2CEF5B98005CFD8D /* RoundedTextFieldStyle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

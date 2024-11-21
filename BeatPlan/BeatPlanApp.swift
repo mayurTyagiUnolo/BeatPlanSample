@@ -12,8 +12,9 @@ struct BeatPlanApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack{
-                CreateBeatPlan()
+//                CreateBeatPlan()
 //                CustomAlertController()
+                BeatListView(viewModel: BeatListView.ViewModel())
             }
         }
     }

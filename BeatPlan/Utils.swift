@@ -30,7 +30,7 @@ class Utils {
     static func getVisitList() -> [Visit] {
         var visitList = [Visit]()
         for i in 1...10{
-            let visit = Visit(beatVisitID: UUID().uuidString, visitType: 1, visitAddress: "addess", visitName: "client \(i)", lat: 1, lon: 1, radius: 11, clientID: UUID().uuidString, startTime: "", endTime: "", taskType: "task2", sequence: 1, isDeleted: 0, mainOrStaged: 1, createdTs: "", lastModifiedTs: "")
+            let visit = Visit(beatVisitID: UUID().uuidString, visitType: 1, visitAddress: "add.background(.gray.opacity(0.1)).background(.gray.opacity(0.1)).background(.gray.opacity(0.1)).background(.gray.opacity(0.1)).background(.gray.opacity(0.1)).background(.gray.opacity(0.1)).background(.gray.opacity(0.1)).background(.gray.opacity(0.1)).background(.gray.opacity(0.1)).background(.gray.opacity(0.1)).background(.gray.opacity(0.1)).background(.gray.opacity(0.1)).background(.gray.opacity(0.1)).background(.gray.opacity(0.1)).background(.gray.opacity(0.1))ess", visitName: "client \(i)", lat: 1, lon: 1, radius: 11, clientID: UUID().uuidString, startTime: "", endTime: "", taskType: "task2", sequence: 1, isDeleted: 0, mainOrStaged: 1, createdTs: "", lastModifiedTs: "")
             visitList.append(visit)
             
         }
@@ -49,8 +49,8 @@ extension Utils{
     
     
     static let beatArray = [
-        Beat(beatID: UUID().uuidString, beatName: "Beat 1", status: 1, isDeleted: 0, mainOrStaged: 1, visitList: Utils.getVisitList(), createdTs: "", lastModifiedTs: ""),
         Beat(beatID: UUID().uuidString, beatName: "Beat 2", status: 1, isDeleted: 0, mainOrStaged: 1, visitList: Utils.getVisitList(), createdTs: "", lastModifiedTs: ""),
+        Beat(beatID: UUID().uuidString, beatName: "Beat 1skdfv sdcoijdv sdsoijsv dsa.vbshoiv ddvjd ndsvpdvn,s 9vnbsdbg [uvfsdv 9vfn bdvhu", status: 1, isDeleted: 0, mainOrStaged: 1, visitList: Utils.getVisitList(), createdTs: "", lastModifiedTs: ""),
         Beat(beatID: UUID().uuidString, beatName: "Beat 3", status: 1, isDeleted: 0, mainOrStaged: 1, visitList: Utils.getVisitList(), createdTs: "", lastModifiedTs: "")
         ]
     

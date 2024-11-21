@@ -26,7 +26,7 @@ class Beat{
         self.mainOrStaged = mainOrStaged
         self.visitList = visitList
         self.adminName = adminName
-        self.comment = comment
+        self.comment = "rejected due to invalid visits rejected due to invalid visits rejected due to invalid visits rejected due to invalid visitsrejected due to invalid visitsrejected due to invalid visits rejected due to invalid visits rejected due to invalid visits"
         self.rejectReason = rejectReason
         self.createdTs = createdTs
         self.lastModifiedTs = lastModifiedTs
