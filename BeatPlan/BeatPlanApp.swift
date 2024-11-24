@@ -14,7 +14,8 @@ struct BeatPlanApp: App {
             NavigationStack{
 //                CreateBeatPlan()
 //                CustomAlertController()
-                BeatListView(viewModel: BeatListView.ViewModel())
+//                BeatListView(viewModel: BeatListView.ViewModel())
+                BeatPlanDashboardView()
             }
         }
     }
