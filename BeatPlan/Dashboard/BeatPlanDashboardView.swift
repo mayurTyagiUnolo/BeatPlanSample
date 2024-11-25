@@ -145,13 +145,15 @@ struct FilterView: View {
     @State private var showDatePicker: Bool = false
     
     var body: some View {
-        Button{
+        Menu("Hello"){
+            Button(role: .destructive){
             showDatePicker = true
             showFilterOptions = true
-//            SwiftUIScreenDemo(calendar: Calendar.current, monthsLayout: MonthsLayout.vertical(options: VerticalMonthsLayoutOptions()))
+            //            SwiftUIScreenDemo(calendar: Calendar.current, monthsLayout: MonthsLayout.vertical(options: VerticalMonthsLayoutOptions()))
         } label: {
-            Image("filterIcon")
-                .background(.yellow)
+            Text("trash")
+            Image(systemName: "trash")
+                .foregroundStyle(.red)
         }
         .frame(height: 25)
         .padding(12)
@@ -160,6 +162,7 @@ struct FilterView: View {
         .sheet(isPresented: $showDatePicker) {
             AirbnbDateRangePicker(calendar: Calendar.current, monthsLayout: MonthsLayout.vertical(options: VerticalMonthsLayoutOptions(pinDaysOfWeekToTop: false, alwaysShowCompleteBoundaryMonths: false, scrollsToFirstMonthOnStatusBarTap: false)), dateHandler: dateRangeSelected)
         }
+    }
     }
     
     func dateRangeSelected(startDate: String, endDate: String){
