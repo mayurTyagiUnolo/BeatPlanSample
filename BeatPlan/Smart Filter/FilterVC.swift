@@ -19,10 +19,17 @@ struct FilterVC: View {
             .clipShape(RoundedRectangle(cornerRadius: 20))
             .shadow(radius: 10)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(.gray.opacity(0.2))
         .sheet(isPresented: $showSheet) {
-            SmartFilterView()
+            SmartFilterView(filtersSelectedHandler: filtereSelected)
                 .presentationDragIndicator(.visible)
+                .presentationDetents([.medium, .large])
         }
+    }
+    
+    func filtereSelected(filters: Int){
+        showSheet = false
     }
 }
 
